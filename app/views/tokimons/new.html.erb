@@ -9,13 +9,21 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		//set the initial trainer input to the currently selected trainers value
 		$('#tokimon_trainer_id').val($('#trainerVal option:selected').val());
+		//whenever a field with a sum class is modified..
 		$('.sum').on('input',function() {
+			//if user enters num > 100, put back to 100
+			if (parseInt($(this).find('input').val()) > 100) {
+				$(this).find('input').val(100);
+			}
+			//calculate total on every update
 			$('#tokimon_total').val(generateSums())
 		});
 	});
 
 	function displayInBox() {
+		//whenever a new trainer is selected, update the trainer input
 		$('#tokimon_trainer_id').val($('#trainerVal option:selected').val());
 	}
 
@@ -26,10 +34,17 @@
 
 		//keep checking if we are still on a class that needs summing
 		while (currSum.is('.sum'))  {
+			var valOfInput = currSum.find('input').val();
 			//if the input field in the div class is not empty
-			if (currSum.find('input').val() != '') {
-				//add the total
-				total += parseInt(currSum.find('input').val());
+			if (valOfInput != '') {
+				//add the total and do a check to make each field < 100
+				if (valOfInput > 100) {
+					total += 100;
+				}
+				else {
+					total += parseInt(valOfInput);
+				}
+
 			}
 			//traverse the siblings
 			currSum = currSum.next($('.sum'));
