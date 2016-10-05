@@ -8,9 +8,35 @@
 </select>
 
 <script type="text/javascript">
+	$(document).ready(function() {
+		$('#tokimon_trainer_id').val($('#trainerVal option:selected').val());
+		$('.sum').on('input',function() {
+			$('#tokimon_total').val(generateSums())
+		});
+	});
+
 	function displayInBox() {
 		$('#tokimon_trainer_id').val($('#trainerVal option:selected').val());
 	}
+
+	function generateSums() {
+		//select our first sum class
+		var currSum = $('.sum');
+		var total = 0;
+
+		//keep checking if we are still on a class that needs summing
+		while (currSum.is('.sum'))  {
+			//if the input field in the div class is not empty
+			if (currSum.find('input').val() != '') {
+				//add the total
+				total += parseInt(currSum.find('input').val());
+			}
+			//traverse the siblings
+			currSum = currSum.next($('.sum'));
+		}
+		return total;
+	}
+
 </script>
 
 <%= render 'form', tokimon: @tokimon %>

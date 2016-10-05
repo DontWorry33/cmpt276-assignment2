@@ -31,27 +31,27 @@
     <%= f.text_field :height %>
   </div>
 
-  <div class="field">
+  <div class="field sum">
     <%= f.label :fly %>
     <%= f.number_field :fly %>
   </div>
 
-  <div class="field">
+  <div class="field sum">
     <%= f.label :fight %>
     <%= f.number_field :fight %>
   </div>
 
-  <div class="field">
+  <div class="field sum">
     <%= f.label :water %>
     <%= f.number_field :water %>
   </div>
 
-  <div class="field">
+  <div class="field sum">
     <%= f.label :fire %>
     <%= f.number_field :fire %>
   </div>
 
-  <div class="field">
+  <div class="field sum">
     <%= f.label :electric %>
     <%= f.number_field :electric %>
   </div>
@@ -63,7 +63,7 @@
 
   <div class="field">
     <%= f.label :total %>
-    <%= f.number_field :total %>
+    <%= f.number_field :total,:readonly => true, :disabled => true %>
   </div>
 
   <div class="actions">
