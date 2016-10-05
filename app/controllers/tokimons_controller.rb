@@ -25,9 +25,10 @@ class TokimonsController < ApplicationController
   # POST /tokimons
   # POST /tokimons.json
   def create
+    @trainers = Trainer.all
     @tokimon = Tokimon.new(tokimon_params)
-
     respond_to do |format|
+
       if @tokimon.save
         format.html { redirect_to @tokimon, notice: 'Tokimon was successfully created.' }
         format.json { render :show, status: :created, location: @tokimon }
@@ -36,6 +37,12 @@ class TokimonsController < ApplicationController
         format.json { render json: @tokimon.errors, status: :unprocessable_entity }
       end
     end
+    
+    if @tokimon.trainer.tokimons.length % 3 == 0
+      @tokimon.trainer.level += 1;
+      @tokimon.trainer.save
+    end
+
   end
 
   # PATCH/PUT /tokimons/1
