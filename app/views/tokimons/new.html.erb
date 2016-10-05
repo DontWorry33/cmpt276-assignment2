@@ -1,0 +1,19 @@
+<h1>New Tokimon</h1>
+<strong>Available Trainers (ID):</strong>
+
+<select onchange="displayInBox()" id="trainerVal">
+<% @trainers.each do |ter| %>
+	<option value=<%= ter.id %>> <%= ter.name %> (<%= ter.id %>) </option>
+<% end %>
+</select>
+
+<script type="text/javascript">
+	function displayInBox() {
+		$('#tokimon_trainer_id').val($('#trainerVal option:selected').val());
+	}
+</script>
+
+<%= render 'form', tokimon: @tokimon %>
+
+
+<%= link_to 'Back', tokimons_path %>
