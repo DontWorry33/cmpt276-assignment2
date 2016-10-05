@@ -1,9 +1,8 @@
 <h1>New Tokimon</h1>
 <strong>Available Trainers (ID):</strong>
-
 <select onchange="displayInBox()" id="trainerVal">
-<% @trainers.each do |ter| %>
-	<option value=<%= ter.id %>> <%= ter.name %> (<%= ter.id %>) </option>
+<% @trainers.each do |trainer| %>
+	<option value=<%= trainer.id %>> <%= trainer.name %> (<%= trainer.id %>) </option>
 <% end %>
 </select>
 
@@ -16,6 +15,10 @@
 			//if user enters num > 100, put back to 100
 			if (parseInt($(this).find('input').val()) > 100) {
 				$(this).find('input').val(100);
+			}
+			else if (parseInt($(this).find('input').val()) < 0)
+			{
+				$(this).find('input').val(0)
 			}
 			//calculate total on every update
 			$('#tokimon_total').val(generateSums())
@@ -40,6 +43,9 @@
 				//add the total and do a check to make each field < 100
 				if (valOfInput > 100) {
 					total += 100;
+				}
+				else if (valOfInput < 0) {
+
 				}
 				else {
 					total += parseInt(valOfInput);
