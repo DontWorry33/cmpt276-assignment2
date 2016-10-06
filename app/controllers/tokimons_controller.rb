@@ -20,6 +20,7 @@ class TokimonsController < ApplicationController
 
   # GET /tokimons/1/edit
   def edit
+    @trainers = Trainer.all
   end
 
   # POST /tokimons
@@ -48,6 +49,8 @@ class TokimonsController < ApplicationController
   # PATCH/PUT /tokimons/1
   # PATCH/PUT /tokimons/1.json
   def update
+    @tokimons = Tokimon.all
+    @trainers = Trainer.all
     respond_to do |format|
       if @tokimon.update(tokimon_params)
         format.html { redirect_to @tokimon, notice: 'Tokimon was successfully updated.' }
