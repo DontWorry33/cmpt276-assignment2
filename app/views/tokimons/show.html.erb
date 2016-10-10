@@ -1,16 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<img id="tokimonImg" src="" alt="Placeholder" height="300" width="300">
+<img id="tokimonImg" src="<%= @roboHashLink %>" alt="Placeholder" height="300" width="300">
 
 <div id="tokimonAttributes" >
 
-    
   <p>
     <strong>Trainer:</strong>
     <%= @tokimon.trainer.name %>
   </p>
 
-  <p id="tokimonName" value="<%= @tokimon.name %>">
+  <p>
     <strong>Name:</strong>
     <%= @tokimon.name %>
   </p>
@@ -61,11 +60,6 @@
     <%= @tokimon.total %>
   </p>
 </div>
-<script type="text/javascript">
-  $(document).ready(function() {
-    document.getElementById("tokimonImg").src = "http://robohash.org/"+$("#tokimonName").text();
-  });
-</script>
 
 <%= link_to 'Edit', edit_tokimon_path(@tokimon) %> |
 <%= link_to 'Back', tokimons_path %>
