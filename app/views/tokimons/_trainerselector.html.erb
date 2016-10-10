@@ -1,5 +1,6 @@
 <strong>Available Trainers (ID):</strong>
 <select onchange="displayInBox()" id="trainerVal">
+<option value="0">  </option>
 trainers.sort_by{|e| e[:id]}
 <%= trainers.each do |trainer| %>
 	<option value=<%= trainer.id %>> <%= trainer.name %> (<%= trainer.id %>) </option>
@@ -8,7 +9,7 @@ trainers.sort_by{|e| e[:id]}
 <script type="text/javascript">
 	$(document).ready(function() {
 		//set the initial trainer input to the currently selected trainers value
-		$('#tokimon_trainer_id').val($('#trainerVal option:selected').val());
+		//$('#tokimon_trainer_id').val($('#trainerVal option:selected').val());
 		//whenever a field with a sum class is modified..
 		$('.sum').on('input',function() {
 			//if user enters num > 100, put back to 100
@@ -26,7 +27,7 @@ trainers.sort_by{|e| e[:id]}
 
 	function displayInBox() {
 		//whenever a new trainer is selected, update the trainer input
-		$('#tokimon_trainer_id').val($('#trainerVaal option:selected').val());
+		$('#tokimon_trainer_id').val($('#trainerVal option:selected').val());
 	}
 
 	function generateSums() {
