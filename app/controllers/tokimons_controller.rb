@@ -5,6 +5,7 @@ class TokimonsController < ApplicationController
   # GET /tokimons.json
   def index
     @tokimons = Tokimon.all
+
   end
 
   # GET /tokimons/1
@@ -66,6 +67,12 @@ class TokimonsController < ApplicationController
   # DELETE /tokimons/1
   # DELETE /tokimons/1.json
   def destroy
+    
+    if @tokimon.trainer.tokimons.length % 3 == 0
+      @tokimon.trainer.level -= 1;
+      @tokimon.trainer.save
+    end
+
     @tokimon.destroy
     respond_to do |format|
       format.html { redirect_to tokimons_url, notice: 'Tokimon was successfully destroyed.' }
