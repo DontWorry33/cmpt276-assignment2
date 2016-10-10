@@ -6,9 +6,58 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+
+		h2 {
+			text-align: center;
+		}
+
+		ul {
+		    list-style-type: none;
+		    margin: 0;
+		    padding: 0;
+		    overflow: hidden;
+		    background-color: #333;
+		    text-align: center;
+		}
+
+		li {
+			display: inline;
+
+		}
+
+		li a {
+		    display: inline-block;
+		    color: white;
+		    text-align: center;
+		    padding: 14px 16px;
+		    text-decoration: none;
+		}
+
+		/* Change the link color to #111 (black) on hover */
+		li a:hover {
+		    background-color: #111;
+		}
+
+		.active {
+		    background-color: #4CAF50;
+		}
+
+	</style>
   </head>
 
   <body>
+  	<h2>Total tokimons in training: <%= @totalTokimons %> </h2>
+
+	<ul>
+	  <li><%= link_to 'Trainer Leaderboard', trainers_path %></li>
+	  <li><%= link_to 'Tokimon List', tokimons_path %> </li>
+	  <li><%= link_to 'Sign Up As A Trainer!', new_trainer_path %></li>
+	  <li><%= link_to 'Add new Tokimon', new_tokimon_path %></li>
+	  <li><a href="">Search</a></li>
+	</ul>
+
     <%= yield %>
+
   </body>
 </html>
