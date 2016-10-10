@@ -10,5 +10,46 @@
   <%= @trainer.level %>
 </p>
 
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Weight</th>
+      <th>Height</th>
+      <th>Fly</th>
+      <th>Fight</th>
+      <th>Water</th>
+      <th>Fire</th>
+      <th>Electric</th>
+      <th>Freeze</th>
+      <th>Total</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @trainer.tokimons.each do |tokimon| %>
+      <tr>
+        <td><%= link_to tokimon.name, tokimon %></td>
+        <td><%= tokimon.weight %></td>
+        <td><%= tokimon.height %></td>
+        <td><%= tokimon.fly %></td>
+        <td><%= tokimon.fight %></td>
+        <td><%= tokimon.water %></td>
+        <td><%= tokimon.fire %></td>
+        <td><%= tokimon.electric %></td>
+        <td><%= tokimon.freeze %></td>
+        <td><%= tokimon.total %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br/>
+<br/>
+<br/>
+
+
 <%= link_to 'Edit', edit_trainer_path(@trainer) %> |
 <%= link_to 'Back', trainers_path %>
