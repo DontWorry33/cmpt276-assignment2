@@ -1,59 +1,71 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Trainer:</strong>
-  <%= @tokimon.trainer_id %>
-</p>
+<img id="tokimonImg" src="" alt="Placeholder" height="300" width="300">
 
-<p>
-  <strong>Name:</strong>
-  <%= @tokimon.name %>
-</p>
+<div id="tokimonAttributes" >
 
-<p>
-  <strong>Weight:</strong>
-  <%= @tokimon.weight %>
-</p>
+    
+  <p>
+    <strong>Trainer:</strong>
+    <%= @tokimon.trainer.name %>
+  </p>
 
-<p>
-  <strong>Height:</strong>
-  <%= @tokimon.height %>
-</p>
+  <p id="tokimonName" value="<%= @tokimon.name %>">
+    <strong>Name:</strong>
+    <%= @tokimon.name %>
+  </p>
 
-<p>
-  <strong>Fly:</strong>
-  <%= @tokimon.fly %>
-</p>
+  <p>
+    <strong>Weight:</strong>
+    <%= @tokimon.weight %>
+  </p>
 
-<p>
-  <strong>Fight:</strong>
-  <%= @tokimon.fight %>
-</p>
+  <p>
+    <strong>Height:</strong>
+    <%= @tokimon.height %>
+  </p>
 
-<p>
-  <strong>Water:</strong>
-  <%= @tokimon.water %>
-</p>
 
-<p>
-  <strong>Fire:</strong>
-  <%= @tokimon.fire %>
-</p>
+  <p>
+    <strong>Fly:</strong>
+    <%= @tokimon.fly %>
+  </p>
 
-<p>
-  <strong>Electric:</strong>
-  <%= @tokimon.electric %>
-</p>
+  <p>
+    <strong>Fight:</strong>
+    <%= @tokimon.fight %>
+  </p>
 
-<p>
-  <strong>Freeze:</strong>
-  <%= @tokimon.freeze %>
-</p>
+  <p>
+    <strong>Water:</strong>
+    <%= @tokimon.water %>
+  </p>
 
-<p>
-  <strong>Total:</strong>
-  <%= @tokimon.total %>
-</p>
+  <p>
+    <strong>Fire:</strong>
+    <%= @tokimon.fire %>
+  </p>
+
+  <p>
+    <strong>Electric:</strong>
+    <%= @tokimon.electric %>
+  </p>
+
+  <p>
+    <strong>Freeze:</strong>
+    <%= @tokimon.freeze %>
+  </p>
+
+  <p>
+    <strong>Total:</strong>
+    <%= @tokimon.total %>
+  </p>
+</div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    document.getElementById("tokimonImg").src = "http://robohash.org/"+$("#tokimonName").text();
+  });
+</script>
 
 <%= link_to 'Edit', edit_tokimon_path(@tokimon) %> |
 <%= link_to 'Back', tokimons_path %>
