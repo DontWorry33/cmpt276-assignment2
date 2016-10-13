@@ -1,46 +1,88 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Tokimons</h1>
+<% @data = Tokimon.group("id").sum("total") %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Trainer</th>
-      <th>Name</th>
-      <th>Weight</th>
-      <th>Height</th>
-      <th>Fly</th>
-      <th>Fight</th>
-      <th>Water</th>
-      <th>Fire</th>
-      <th>Electric</th>
-      <th>Freeze</th>
-      <th>Total</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= line_chart @data, max: 600, library: {scales: {yAxes: [{ticks: {max: 700, min: 1, stepSize: 100}}]}}, id: "tokimon-total-chart"  %>
 
-  <tbody>
-    <% @tokimons.each do |tokimon| %>
+<div class="maintokimonlist">
+  <table class="maintokimontable">
+    <thead>
       <tr>
-        <td><%= link_to tokimon.trainer.name, tokimon.trainer %></td>
-        <td><%= link_to tokimon.name, tokimon %></td>
-        <td><%= tokimon.weight %></td>
-        <td><%= tokimon.height %></td>
-        <td><%= tokimon.fly %></td>
-        <td><%= tokimon.fight %></td>
-        <td><%= tokimon.water %></td>
-        <td><%= tokimon.fire %></td>
-        <td><%= tokimon.electric %></td>
-        <td><%= tokimon.freeze %></td>
-        <td><%= tokimon.total %></td>
-        <td><%= link_to 'Edit', edit_tokimon_path(tokimon) %></td>
-        <td><%= link_to 'Destroy', tokimon, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Id</td>
+        <th>Trainer</th>
+        <th>Name</th>
+        <th>Weight</th>
+        <th>Height</th>
+        <th>Fly</th>
+        <th>Fight</th>
+        <th>Water</th>
+        <th>Fire</th>
+        <th>Electric</th>
+        <th>Freezer</th>
+        <th>Total</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @tokimons.each do |tokimon| %>
+        <tr>
+          <td id="scrollToVal"><%= tokimon.id %></td>
+          <td><%= link_to tokimon.trainer.name, tokimon.trainer %></td>
+          <td><%= link_to tokimon.name, tokimon %></td>
+          <td><%= tokimon.weight %></td>
+          <td><%= tokimon.height %></td>
+          <td><%= tokimon.fly %></td>
+          <td><%= tokimon.fight %></td>
+          <td><%= tokimon.water %></td>
+          <td><%= tokimon.fire %></td>
+          <td><%= tokimon.electric %></td>
+          <td><%= tokimon.freezer %></td>
+          <td><%= tokimon.total %></td>
+          <td><%= link_to 'Edit', edit_tokimon_path(tokimon) %></td>
+          <td><%= link_to 'Destroy', tokimon, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <br>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+      var w = $(window);
+      var rowToGo;
+
+      var highchart = $("#tokimon-total-chart").highcharts().series[0].update({ events:{ click: function(event) { 
+        
+        var row = $('.maintokimontable').find('td#scrollToVal');
+        
+        $.each(row, function(ind, elem) {
+          if (parseInt(($(elem).text())) == event.point.x+1) {
+            if (rowToGo != undefined) {
+              rowToGo.removeClass('highlightRow');
+            }
+            rowToGo = $('.maintokimontable').find('tr').eq(ind+1);
+
+            return;
+          };
+        })
+
+        if (rowToGo.length){
+            w.scrollTop( rowToGo.offset().top - (w.height()/2) );
+            rowToGo.addClass("highlightRow");
+        }
+
+
+      } }});
+
+    });
+
+  //console.log(chart.getChartObject().options)
+  //console.log(chart.getChartObject().options.scales["yAxes"]["0"].ticks["maxTicksLimit"] = 20)
+</script>
+
 
 <%= link_to 'New Tokimon', new_tokimon_path %>

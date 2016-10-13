@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field greyout">
     <%= f.label :trainer_id %>
     <%= f.number_field :trainer_id,:readonly => true %>
   </div>
@@ -58,12 +58,12 @@
     <%= f.number_field :electric %>
   </div>
 
-  <div class="field">
-    <%= f.label :freeze %>
-    <%= f.number_field :freeze %>
+  <div class="field sum">
+    <%= f.label :freezer %>
+    <%= f.number_field :freezer %>
   </div>
 
-  <div class="field">
+  <div class="field greyout">
     <%= f.label :total %>
     <%= f.number_field :total,:readonly => true %>
   </div>

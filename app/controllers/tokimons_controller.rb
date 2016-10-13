@@ -4,14 +4,14 @@ class TokimonsController < ApplicationController
   # GET /tokimons
   # GET /tokimons.json
   def index
-    @tokimons = Tokimon.all
-
+    @tokimons = Tokimon.all    
   end
 
   # GET /tokimons/1
   # GET /tokimons/1.json
   def show
     @roboHashLink = "http://robohash.org/"+@tokimon.id.to_s
+    @tokimons = Tokimon.all
   end
 
   # GET /tokimons/new
@@ -67,7 +67,7 @@ class TokimonsController < ApplicationController
   # DELETE /tokimons/1
   # DELETE /tokimons/1.json
   def destroy
-    
+
     if @tokimon.trainer.tokimons.length % 3 == 0
       @tokimon.trainer.level -= 1;
       @tokimon.trainer.save
@@ -88,6 +88,6 @@ class TokimonsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tokimon_params
-      params.require(:tokimon).permit(:trainer_id, :name, :weight, :height, :fly, :fight, :water, :fire, :electric, :freeze, :total)
+      params.require(:tokimon).permit(:trainer_id, :name, :weight, :height, :fly, :fight, :water, :fire, :electric, :freezer, :total)
     end
 end

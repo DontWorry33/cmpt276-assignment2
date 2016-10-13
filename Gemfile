@@ -50,3 +50,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #for clashing names to take care of itself
 gem 'safe_attributes'
 
+gem 'groupdate'
+
+gem 'chartkick'
+
+gem 'faker'
