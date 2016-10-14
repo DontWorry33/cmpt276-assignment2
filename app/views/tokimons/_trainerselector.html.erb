@@ -1,7 +1,6 @@
 <strong>Available Trainers (ID):</strong>
 <select onchange="displayInBox()" id="trainerVal">
 <option value="0">  </option>
-trainers.sort_by{|e| e[:id]}
 <%= trainers.each do |trainer| %>
 	<option value=<%= trainer.id %>> <%= trainer.name %> (<%= trainer.id %>) </option>
 <% end %>
