@@ -2,15 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
-#trainersList {
-	border: 1px solid black;
-}
-
-#tokimonList td {
-	border: 1px solid black;
-}
-
+/* TAKEN FROM w3 SCHOOLS */
 /* The switch - the box around the slider */
 .switch {
   margin-left: auto;
@@ -20,6 +12,7 @@
   width: 60px;
   height: 34px;
   margin: auto;
+
 
 }
 
@@ -73,6 +66,8 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+/* TAKEN FROM w3 SCHOOLS */
+
 
 .header {
 	background-color: gray;
@@ -111,11 +106,9 @@ ul.tokimonBoard {
 }
 
 ul.trainerBoard li {
-	
 	display: inline-block;
 	text-align: center;
     font-size: 16px;
-    color: black;
     width: 300px;
  
 }
@@ -134,19 +127,19 @@ ul.trainerBoard li a {
     text-decoration: none;
     display: inline;
     font-size: 16px;
-    text-decoration-color: black;
+    color: #003366;
 }
 
 ul.tokimonBoard li a {
     text-decoration: none;
     display: inline;
-    text-decoration-color: black;
+
 }
 
 
 /* Change the link color to #111 (black) on hover */
 li a:hover {
-    background-color: #111;
+    background-color: #CCCCCC;
 }
 
 .trainerHeaders {

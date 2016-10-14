@@ -4,7 +4,7 @@ class TokimonsController < ApplicationController
   # GET /tokimons
   # GET /tokimons.json
   def index
-    @tokimons = Tokimon.all    
+    @tokimons = Tokimon.all   
   end
 
   # GET /tokimons/1
@@ -16,7 +16,7 @@ class TokimonsController < ApplicationController
 
   # GET /tokimons/new
   def new
-    @trainers = Trainer.all
+    @trainers = Trainer.all.order(:id)
     @tokimon = Tokimon.new
   end
 

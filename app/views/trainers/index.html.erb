@@ -12,9 +12,11 @@
 <div class="leaderBoard">
 
   <ul class="trainerBoard">
+    <div class="trainerTableHeaders">'
       <li>Name</li>
       <li>Level</li>
       <li>Tokimon Count</li>
+    </div>
     <br/>
     <% @trainers.each do |trainer| %>
       <li> <%= link_to trainer.name, trainer %> </li>  
