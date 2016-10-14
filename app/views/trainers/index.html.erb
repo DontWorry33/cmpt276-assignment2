@@ -14,10 +14,12 @@
   <ul class="trainerBoard">
       <li>Name</li>
       <li>Level</li>
+      <li>Tokimon Count</li>
     <br/>
     <% @trainers.each do |trainer| %>
       <li> <%= link_to trainer.name, trainer %> </li>  
       <li> <%= trainer.level %> </li>
+      <li> <%= trainer.tokimons.length %> </li>
       <br/>
           <ul class="tokimonBoard header">
           <li> Name </li>
@@ -31,6 +33,7 @@
           <li> Freezer </li>
           <li> Total </li>
     </ul>
+
       <% trainer.tokimons.each do |tokimon| %>
         <ul class="tokimonBoard"> 
           <li> <%= link_to tokimon.name, tokimon %> </li>
@@ -46,6 +49,7 @@
         
         </ul>
       <% end %>
+        <div class="spacer"></div>
     <% end %>
   </ul>
 </div>
