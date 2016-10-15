@@ -11,8 +11,6 @@
 require 'faker'
 
   desc "Fill database with sample data"
-  task :populate => :environment do
-    Rake::Task['db:reset'].invoke
     150.times do |n|
       name  = Faker::Company.name
       height = 1+rand(1000);
@@ -41,5 +39,4 @@ require 'faker'
                     :total => total,
                     :trainer => trainer)
 
-    end
-  end
+  	end
