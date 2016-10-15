@@ -13,3 +13,15 @@
  *= require_tree .
  *= require_self
  */
+
+
+#error_explanation {
+	margin: auto;
+	display: inline-block;
+}
+
+.field_with_errors {
+	margin: auto;
+	display: block;	
+	width: 25%;
+}

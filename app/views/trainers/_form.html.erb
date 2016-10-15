@@ -15,13 +15,21 @@
     <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
-
-  <div class="field">
+  <br/>
+  <br/>
+  <div class="field autoinput greyout">
     <%= f.label :level %>
-    <%= f.number_field :level %>
+    <%= f.number_field :level,:readonly => true%>
   </div>
 
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+      $(".autoinput input").val(1);
+  });
+</script>

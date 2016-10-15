@@ -1,6 +1,6 @@
 <strong>Available Trainers (ID):</strong>
 <select onchange="displayInBox()" id="trainerVal">
-<option value="0">  </option>
+<option value="">  </option>
 <%= trainers.each do |trainer| %>
 	<option value=<%= trainer.id %>> <%= trainer.name %> (<%= trainer.id %>) </option>
 <% end %>

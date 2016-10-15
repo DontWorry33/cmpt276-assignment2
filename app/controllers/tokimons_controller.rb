@@ -4,7 +4,7 @@ class TokimonsController < ApplicationController
   # GET /tokimons
   # GET /tokimons.json
   def index
-    @tokimons = Tokimon.all   
+    @tokimons = Tokimon.all.order(:id) 
   end
 
   # GET /tokimons/1
@@ -31,20 +31,24 @@ class TokimonsController < ApplicationController
     @trainers = Trainer.all
     @tokimon = Tokimon.new(tokimon_params)
     respond_to do |format|
+      if @tokimon.name.blank?()
+        @tokimon.errors.add(:name)
+        format.html { render :new }
+        format.json { render json: @tokimon.errors, status: :unprocessable_entity }
 
-      if @tokimon.save
+      elsif @tokimon.save
         format.html { redirect_to @tokimon, notice: 'Tokimon was successfully created.' }
         format.json { render :show, status: :created, location: @tokimon }
+        @tokimon.trainer.incrementLevel
+        
       else
         format.html { render :new }
         format.json { render json: @tokimon.errors, status: :unprocessable_entity }
       end
+
     end
     
-    if @tokimon.trainer.tokimons.length % 3 == 0
-      @tokimon.trainer.level += 1;
-      @tokimon.trainer.save
-    end
+
 
   end
 
@@ -55,6 +59,7 @@ class TokimonsController < ApplicationController
     @trainers = Trainer.all
     respond_to do |format|
       if @tokimon.update(tokimon_params)
+
         format.html { redirect_to @tokimon, notice: 'Tokimon was successfully updated.' }
         format.json { render :show, status: :ok, location: @tokimon }
       else
@@ -68,10 +73,8 @@ class TokimonsController < ApplicationController
   # DELETE /tokimons/1.json
   def destroy
 
-    if @tokimon.trainer.tokimons.length % 3 == 0
-      @tokimon.trainer.level -= 1;
-      @tokimon.trainer.save
-    end
+    @tokimon.trainer.decrementLevel
+
 
     @tokimon.destroy
     respond_to do |format|

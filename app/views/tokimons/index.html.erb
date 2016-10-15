@@ -5,6 +5,11 @@
 
 <%= line_chart @data, max: 600, library: {scales: {yAxes: [{ticks: {max: 700, min: 1, stepSize: 100}}]}}, id: "tokimon-total-chart"  %>
 
+
+<div class="centerText">
+  <%= link_to 'New Tokimon', new_tokimon_path %>
+</div>
+
 <div class="maintokimonlist">
   <table class="maintokimontable">
     <thead>
@@ -54,19 +59,29 @@
   $(document).ready(function() {
       var w = $(window);
       var rowToGo;
-
+      var debug = false; 
       var highchart = $("#tokimon-total-chart").highcharts().series[0].update({ events:{ click: function(event) { 
-        
+
+        var realInt = parseInt(event.point.name);
         var row = $('.maintokimontable').find('td#scrollToVal');
         
+       
+        if (debug) console.log("ST INDEX: ", startIndex);
+        if (debug) console.log("EVENT POINT X: ", event.point.x);
+
         $.each(row, function(ind, elem) {
-          if (parseInt(($(elem).text())) == event.point.x+1) {
+          if (parseInt(($(elem).text())) == realInt) {
+            
+            if (debug) console.log("NEW START INDEX: ", startIndex);
+
             if (rowToGo != undefined) {
               rowToGo.removeClass('highlightRow');
             }
-            rowToGo = $('.maintokimontable').find('tr').eq(ind+1);
 
+            if (debug) console.log("INNER IND: ", ind)
+            rowToGo = $('.maintokimontable').find('tr').eq(ind+1);
             return;
+            
           };
         })
 
@@ -84,5 +99,6 @@
   //console.log(chart.getChartObject().options.scales["yAxes"]["0"].ticks["maxTicksLimit"] = 20)
 </script>
 
-
-<%= link_to 'New Tokimon', new_tokimon_path %>
+<div class="centerText">
+  <%= link_to 'New Tokimon', new_tokimon_path %>
+</div>

@@ -27,19 +27,16 @@
   </p>
 
 
-    <% @distinctVals = Tokimon.select("fly").count - 1 %>
-    <% @posRecord = ActiveRecord::Base.connection.exec_query("SELECT count(*) FROM tokimons WHERE fly < (SELECT fly FROM tokimons WHERE fly = #{@tokimon.fly} AND id = #{@tokimon.id}) ")%>
-
     <div class="tooltip">
       <strong>Fly:</strong>
       <%= @tokimon.fly %>
 
       <span class="tooltiptext">
 
-        <% if @posRecord.last()["count"].to_f / @distinctVals.to_f == 1.0 %>
+        <% if @tokimon.isSkillTop("fly", @tokimon.fly) %>
           <%= "Your skill is rated in the top 1%" %>
         <% else %>
-        <p> Your skill is rated in the top <%= (1 - @posRecord.last()["count"].to_f / @distinctVals.to_f) * 100 %> %  </p>
+        <p> Your skill is rated in the top <%= @tokimon.getSkillPct("fly", @tokimon.fly) %> %  </p>
         <% end %>
 
       </span>
@@ -48,8 +45,6 @@
 
     <p></p>
 
-    <% @distinctVals = Tokimon.select("fight").count - 1 %>
-    <% @posRecord = ActiveRecord::Base.connection.exec_query("SELECT count(*) FROM tokimons WHERE fight < (SELECT fight FROM tokimons WHERE fight = #{@tokimon.fight} AND id = #{@tokimon.id}) ")%>
 
       <div class="tooltip">
         <strong>Fight:</strong>
@@ -57,10 +52,10 @@
 
         <span class="tooltiptext">
 
-        <% if @posRecord.last()["count"].to_f / @distinctVals.to_f == 1.0 %>
+        <% if @tokimon.isSkillTop("fight", @tokimon.fight) %>
           <%= "Your skill is rated in the top 1%" %>
         <% else %>
-        <p> Your skill is rated in the top <%= (1 - @posRecord.last()["count"].to_f / @distinctVals.to_f) * 100 %> %  </p>
+        <p> Your skill is rated in the top <%= @tokimon.getSkillPct("fight", @tokimon.fight) %> %  </p>
         <% end %>
 
       </span>
@@ -68,9 +63,6 @@
     </div>
     <p></p>
 
-
-    <% @distinctVals = Tokimon.select("water").count - 1 %>
-    <% @posRecord = ActiveRecord::Base.connection.exec_query("SELECT count(*) FROM tokimons WHERE water < (SELECT water FROM tokimons WHERE water = #{@tokimon.water} AND id = #{@tokimon.id}) ")%>
 
       <div class="tooltip">
         <strong>Water:</strong>
@@ -78,10 +70,10 @@
 
         <span class="tooltiptext">
 
-        <% if @posRecord.last()["count"].to_f / @distinctVals.to_f == 1.0 %>
+        <% if @tokimon.isSkillTop("water", @tokimon.water) %>
           <%= "Your skill is rated in the top 1%" %>
         <% else %>
-        <p> Your skill is rated in the top <%= (1 - @posRecord.last()["count"].to_f / @distinctVals.to_f) * 100 %> %  </p>
+        <p> Your skill is rated in the top <%= @tokimon.getSkillPct("water", @tokimon.water) %> %  </p>
         <% end %>
 
       </span>
@@ -89,8 +81,6 @@
     </div>
     <p></p>
 
-    <% @distinctVals = Tokimon.select("fire").count - 1 %>
-    <% @posRecord = ActiveRecord::Base.connection.exec_query("SELECT count(*) FROM tokimons WHERE fire < (SELECT fire FROM tokimons WHERE fire = #{@tokimon.fire} AND id = #{@tokimon.id}) ")%>
 
       <div class="tooltip">
         <strong>Fire:</strong>
@@ -98,18 +88,17 @@
 
         <span class="tooltiptext">
 
-        <% if @posRecord.last()["count"].to_f / @distinctVals.to_f == 1.0 %>
+        <% if @tokimon.isSkillTop("fire", @tokimon.fire) %>
           <%= "Your skill is rated in the top 1%" %>
         <% else %>
-        <p> Your skill is rated in the top <%= (1 - @posRecord.last()["count"].to_f / @distinctVals.to_f) * 100 %> %  </p>
+        <p> Your skill is rated in the top <%= @tokimon.getSkillPct("fire", @tokimon.fire) %> %  </p>
         <% end %>
 
       </span>
 
     </div>
     <p></p>
-    <% @distinctVals = Tokimon.select("electric").count - 1 %>
-    <% @posRecord = ActiveRecord::Base.connection.exec_query("SELECT count(*) FROM tokimons WHERE electric < (SELECT electric FROM tokimons WHERE electric = #{@tokimon.electric} AND id = #{@tokimon.id}) ")%>
+
 
       <div class="tooltip">
         <strong>Electric:</strong>
@@ -117,18 +106,17 @@
 
         <span class="tooltiptext">
 
-        <% if @posRecord.last()["count"].to_f / @distinctVals.to_f == 1.0 %>
+        <% if @tokimon.isSkillTop("electric", @tokimon.electric)%>
           <%= "Your skill is rated in the top 1%" %>
         <% else %>
-        <p> Your skill is rated in the top <%= (1 - @posRecord.last()["count"].to_f / @distinctVals.to_f) * 100 %> %  </p>
+        <p> Your skill is rated in the top <%= @tokimon.getSkillPct("electric", @tokimon.electric) %> %  </p>
         <% end %>
 
       </span>
 
     </div>
     <p></p>
-    <% @distinctVals = Tokimon.select("freezer").count - 1 %>
-    <% @posRecord = ActiveRecord::Base.connection.exec_query("SELECT count(*) FROM tokimons WHERE freezer < (SELECT freezer FROM tokimons WHERE freezer = #{@tokimon.freezer} AND id = #{@tokimon.id}) ")%>
+
 
       <div class="tooltip">
         <strong>Freeze:</strong>
@@ -136,10 +124,10 @@
 
         <span class="tooltiptext">
 
-        <% if @posRecord.last()["count"].to_f / @distinctVals.to_f == 1.0 %>
+        <% if @tokimon.isSkillTop("freezer", @tokimon.freezer) %>
           <%= "Your skill is rated in the top 1%" %>
         <% else %>
-        <p> Your skill is rated in the top <%= (1 - @posRecord.last()["count"].to_f / @distinctVals.to_f) * 100 %> %  </p>
+        <p> Your skill is rated in the top <%= @tokimon.getSkillPct("freezer", @tokimon.freezer)%> %  </p>
         <% end %>
 
       </span>
@@ -147,8 +135,6 @@
     </div>
     <p></p>
 
-    <% @distinctVals = Tokimon.select("total").count - 1 %>
-    <% @posRecord = ActiveRecord::Base.connection.exec_query("SELECT count(*) FROM tokimons WHERE total < (SELECT total FROM tokimons WHERE total = #{@tokimon.total} AND id = #{@tokimon.id}) ")%>
 
       <div class="tooltip">
         <strong>Total:</strong>
@@ -156,10 +142,10 @@
 
         <span class="tooltiptext">
 
-        <% if @posRecord.last()["count"].to_f / @distinctVals.to_f == 1.0 %>
+        <% if @tokimon.isSkillTop("total", @tokimon.total) %>
           <%= "Your total is rated in the top 1%" %>
         <% else %>
-        <p> Your total is rated in the top <%= (1 - @posRecord.last()["count"].to_f / @distinctVals.to_f) * 100 %> %  </p>
+        <p> Your total is rated in the top <%= @tokimon.getSkillPct("total", @tokimon.total) %> %  </p>
         <% end %>
 
       </span>

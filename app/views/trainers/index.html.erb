@@ -3,12 +3,9 @@
 <h1>Trainers</h1>
 
 
-<label class="switch">
-  <input class="switchbox" type="checkbox">
-  <div class="slider round"></div>
-</label>
-
-
+<div class="centerText">
+<%= link_to 'New Trainer', new_trainer_path %>
+</div>
 <div class="leaderBoard">
 
   <ul class="trainerBoard">
@@ -16,41 +13,16 @@
       <li>Name</li>
       <li>Level</li>
       <li>Tokimon Count</li>
+      <li></li>
     </div>
     <br/>
     <% @trainers.each do |trainer| %>
       <li> <%= link_to trainer.name, trainer %> </li>  
       <li> <%= trainer.level %> </li>
       <li> <%= trainer.tokimons.length %> </li>
+      <li><%= link_to 'Destroy', trainer, method: :delete, data: { confirm: 'This will also delete all tokimon belonging to the trainer. Are you sure?' } %></li>
       <br/>
-          <ul class="tokimonBoard header">
-          <li> Name </li>
-          <li> Weight </li>
-          <li> Height </li>
-          <li> Fly </li>
-          <li> Fight </li>
-          <li> Water </li>
-          <li> Fire </li>
-          <li> Electric </li>
-          <li> Freezer </li>
-          <li> Total </li>
-    </ul>
-
-      <% trainer.tokimons.each do |tokimon| %>
-        <ul class="tokimonBoard"> 
-          <li> <%= link_to tokimon.name, tokimon %> </li>
-          <li><%= tokimon.weight %></li>
-          <li><%= tokimon.height %></li>
-          <li><%= tokimon.fly %></li>
-          <li><%= tokimon.fight %></li>
-          <li><%= tokimon.water %></li>
-          <li><%= tokimon.fire %></li>
-          <li><%= tokimon.electric %></li>
-          <li><%= tokimon.freezer %></li>
-          <li><%= tokimon.total %></li>
-        
-        </ul>
-      <% end %>
+          
         <div class="spacer"></div>
     <% end %>
   </ul>
@@ -71,4 +43,6 @@
   });
 </script>
 
+<div class="centerText">
 <%= link_to 'New Trainer', new_trainer_path %>
+</div>
