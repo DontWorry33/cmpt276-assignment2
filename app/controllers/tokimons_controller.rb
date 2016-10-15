@@ -40,7 +40,7 @@ class TokimonsController < ApplicationController
         format.html { redirect_to @tokimon, notice: 'Tokimon was successfully created.' }
         format.json { render :show, status: :created, location: @tokimon }
         @tokimon.trainer.incrementLevel
-        
+
       else
         format.html { render :new }
         format.json { render json: @tokimon.errors, status: :unprocessable_entity }
@@ -58,7 +58,18 @@ class TokimonsController < ApplicationController
     @tokimons = Tokimon.all
     @trainers = Trainer.all
     respond_to do |format|
-      if @tokimon.update(tokimon_params)
+      @tmpTokimon = Tokimon.new(tokimon_params);
+      if @tmpTokimon.name.blank?()
+        @tokimon.errors.add(:name)
+        format.html { render :edit }
+        format.json { render json: @tokimon.errors, status: :unprocessable_entity }
+
+      elsif @tmpTokimon.trainer.nil?()
+        @tokimon.errors.add(:trainer_id)
+        format.html { render :edit }
+        format.json { render json: @tokimon.errors, status: :unprocessable_entity }
+
+      elsif @tokimon.update(tokimon_params)
 
         format.html { redirect_to @tokimon, notice: 'Tokimon was successfully updated.' }
         format.json { render :show, status: :ok, location: @tokimon }
