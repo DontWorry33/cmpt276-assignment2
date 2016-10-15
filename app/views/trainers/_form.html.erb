@@ -30,6 +30,6 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-      $(".autoinput input").val(1);
+      if ($(".autoinput input").val() == "") $(".autoinput input").val(1);
   });
 </script>
