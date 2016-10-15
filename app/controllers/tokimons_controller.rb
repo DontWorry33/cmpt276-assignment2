@@ -22,7 +22,7 @@ class TokimonsController < ApplicationController
 
   # GET /tokimons/1/edit
   def edit
-    @trainers = Trainer.all
+    @trainers = Trainer.all.order(:id)
   end
 
   # POST /tokimons
@@ -57,8 +57,12 @@ class TokimonsController < ApplicationController
   def update
     @tokimons = Tokimon.all
     @trainers = Trainer.all
+    oldlength = @tokimon.trainer.tokimons.length
+    oldtokiTrainer = @tokimon.trainer
     respond_to do |format|
       @tmpTokimon = Tokimon.new(tokimon_params);
+
+
       if @tmpTokimon.name.blank?()
         @tokimon.errors.add(:name)
         format.html { render :edit }
@@ -69,14 +73,21 @@ class TokimonsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @tokimon.errors, status: :unprocessable_entity }
 
+
       elsif @tokimon.update(tokimon_params)
 
         format.html { redirect_to @tokimon, notice: 'Tokimon was successfully updated.' }
         format.json { render :show, status: :ok, location: @tokimon }
+
       else
         format.html { render :edit }
         format.json { render json: @tokimon.errors, status: :unprocessable_entity }
       end
+    end
+    if @tokimon.trainer.tokimons.length > oldlength
+      @tokimon.trainer.incrementLevel
+    elsif @tokimon.trainer.tokimons.length < oldlength
+      oldtokiTrainer.decrementLevel
     end
   end
 

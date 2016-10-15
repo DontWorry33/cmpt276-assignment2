@@ -15,5 +15,12 @@ class Trainer < ActiveRecord::Base
         end    	
     end
 
+    def decrementLevelAfterUpdate
+    	if (self.tokimons.length+1) % 3 == 0
+          self.level -= 1;
+          self.save
+        end
+    end
+
 
 end
